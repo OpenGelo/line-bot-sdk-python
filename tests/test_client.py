@@ -27,3 +27,12 @@ class TestLineBotClient():
             preview_url='',
         )
         assert response.status_code == 200
+
+    @responses.activate
+    def test_send_video(self, fx_client, mocking):
+        response = fx_client.send_video(
+            to_mid=[mocking['mid']],
+            video_url='',
+            preview_url='',
+        )
+        assert response.status_code == 200

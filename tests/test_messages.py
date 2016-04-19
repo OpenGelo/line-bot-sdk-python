@@ -28,3 +28,18 @@ class TestMessages():
             'originalContentUrl': image_url,
             'previewImageUrl': preview_url,
         }
+
+    def test_video_message(self):
+        video_url = 'video_url'
+        preview_url = 'preview_url'
+        message = messages.VideoMessage(
+            video_url=video_url,
+            preview_url=preview_url,
+        )
+        assert message.event_type == '138311608800106203'
+        assert message.content == {
+            'contentType': 3,
+            'toType': 1,
+            'originalContentUrl': video_url,
+            'previewImageUrl': preview_url,
+        }

@@ -37,3 +37,16 @@ class ImageMessage(MessageBase):
 
     def is_valid(self):
         return self._attrs['image_url'] and self._attrs['preview_url']
+
+
+class VideoMessage(MessageBase):
+    def _create_content(self):
+        return {
+            'contentType': 3,  # Fixed value
+            'toType': 1,  # 1 => user
+            'originalContentUrl': self._attrs['video_url'],
+            'previewImageUrl': self._attrs['preview_url'],
+        }
+
+    def is_valid(self):
+        return self._attrs['video_url'] and self._attrs['preview_url']

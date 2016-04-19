@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import responses
+
 from linebot.client import LineBotClient
 
 
@@ -12,5 +14,7 @@ class TestLineBotClient():
         }
         LineBotClient(**credentials)
 
-    def test_send_text(self, fx_client):
-        fx_client.send_text(to_mid=[], text='')
+    @responses.activate
+    def test_send_text(self, fx_client, mocking):
+        response = fx_client.send_text(to_mid=[mocking['mid']], text='')
+        assert response.status_code == 200

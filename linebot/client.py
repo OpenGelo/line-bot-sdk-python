@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from linebot import constants
 from linebot import messages
 from linebot.requests import Request
 
@@ -14,7 +15,7 @@ class LineBotClient():
 
     def send_message(self, to_mid, message):
         request = Request(**{
-            'endpoint_path': '/v1/events',
+            'url': constants.API_URL_EVENTS,
             'credentials': self.credentials,
             'to_mid': to_mid,
             'message': message,

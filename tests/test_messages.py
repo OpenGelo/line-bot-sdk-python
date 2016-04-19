@@ -13,3 +13,18 @@ class TestMessages():
             'toType': 1,
             'text': test_text,
         }
+
+    def test_image_message(self):
+        image_url = 'image_url'
+        preview_url = 'preview_url'
+        message = messages.ImageMessage(
+            image_url=image_url,
+            preview_url=preview_url,
+        )
+        assert message.event_type == '138311608800106203'
+        assert message.content == {
+            'contentType': 2,
+            'toType': 1,
+            'originalContentUrl': image_url,
+            'previewImageUrl': preview_url,
+        }

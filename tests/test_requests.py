@@ -1,8 +1,29 @@
 # -*- coding: utf-8 -*-
 
+import json
+
+from linebot import constants
 from linebot.requests import Request
 
 
 class TestRequest():
-    def test_request_instance_creation(self):
-        Request()
+    def test_request_instance_creation(self, fx_client, fx_message, mocking):
+        request = Request(
+            url=constants.API_URL_EVENTS,
+            credentials=fx_client.credentials,
+            to_mid=[mocking['mid']],
+            message=fx_message,
+        )
+        assert request.url == constants.API_URL_EVENTS
+        assert request.headers == {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'X-Line-ChannelID': fx_client.credentials['X-Line-ChannelID'],
+            'X-Line-ChannelSecret': fx_client.credentials['X-Line-ChannelSecret'],
+            'X-Line-Trusted-User-With-ACL': fx_client.credentials['X-Line-Trusted-User-With-ACL'],
+        }
+        assert request.payload == json.dumps({
+            'to': [mocking['mid']],
+            'toChannel': constants.TO_CHANNEL,
+            'eventType': fx_message.event_type,
+            'content': fx_message.content,
+        })

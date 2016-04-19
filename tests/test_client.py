@@ -11,3 +11,6 @@ class TestLineBotClient():
             'channel_mid': fx_channel_mid,
         }
         LineBotClient(**credentials)
+
+    def test_send_text(self, fx_client):
+        fx_client.send_text(to_mid=[], text='')

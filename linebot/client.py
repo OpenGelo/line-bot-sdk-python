@@ -26,3 +26,10 @@ class LineBotClient():
     def send_text(self, **attrs):
         message = messages.TextMessage(text=attrs['text'])
         return self.send_message(attrs['to_mid'], message)
+
+    def send_image(self, **attrs):
+        message = messages.ImageMessage(
+            image_url=attrs['image_url'],
+            preview_url=attrs['preview_url'],
+        )
+        return self.send_message(attrs['to_mid'], message)

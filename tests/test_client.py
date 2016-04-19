@@ -18,3 +18,12 @@ class TestLineBotClient():
     def test_send_text(self, fx_client, mocking):
         response = fx_client.send_text(to_mid=[mocking['mid']], text='')
         assert response.status_code == 200
+
+    @responses.activate
+    def test_send_image(self, fx_client, mocking):
+        response = fx_client.send_image(
+            to_mid=[mocking['mid']],
+            image_url='',
+            preview_url='',
+        )
+        assert response.status_code == 200

@@ -76,3 +76,7 @@ class MultipleMessage():
 class RichMessage():
     def __init__(self, client):
         self.__client = client
+
+    @property
+    def event_type(self):
+        return '138311608800106203'

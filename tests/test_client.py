@@ -89,6 +89,7 @@ class TestLineBotClientSendMultipleMessages():
         )
         assert response.status_code == 200
 
+
 class TestLineBotClientSendRichMessages():
     @responses.activate
     def test_send(self, fx_client, mocking):

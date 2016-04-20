@@ -110,6 +110,15 @@ class RichMessage():
         self.__listeners.append(listener)
         return self
 
+    def __validate_listener_attributes(attrs):
+        return (
+            isinstance(attrs['action'], str) and
+            isinstance(attrs['x'], int) and
+            isinstance(attrs['y'], int) and
+            isinstance(attrs['width'], int) and
+            isinstance(attrs['height'], int)
+        )
+
     def __create_markup_json(self):
         height = self.__determine_height()
         return json.dumps({

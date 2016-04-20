@@ -23,6 +23,7 @@ class TestMultipleMessage():
         assert isinstance(multiple_message, MultipleMessage)
         assert id(fx_multiple_message) == id(multiple_message)
         assert multiple_message.is_valid()
+        assert multiple_message.event_type == '140177271400161403'
 
     def test_add_image(self, fx_multiple_message):
         multiple_message = fx_multiple_message.add_image(
@@ -32,6 +33,7 @@ class TestMultipleMessage():
         assert isinstance(multiple_message, MultipleMessage)
         assert id(fx_multiple_message) == id(multiple_message)
         assert multiple_message.is_valid()
+        assert multiple_message.event_type == '140177271400161403'
 
     def test_add_video(self, fx_multiple_message):
         multiple_message = fx_multiple_message.add_video(
@@ -41,6 +43,7 @@ class TestMultipleMessage():
         assert isinstance(multiple_message, MultipleMessage)
         assert id(fx_multiple_message) == id(multiple_message)
         assert multiple_message.is_valid()
+        assert multiple_message.event_type == '140177271400161403'
 
     def test_add_audio(self, fx_multiple_message):
         multiple_message = fx_multiple_message.add_audio(
@@ -50,6 +53,7 @@ class TestMultipleMessage():
         assert isinstance(multiple_message, MultipleMessage)
         assert id(fx_multiple_message) == id(multiple_message)
         assert multiple_message.is_valid()
+        assert multiple_message.event_type == '140177271400161403'
 
     def test_add_location(self, fx_multiple_message):
         multiple_message = fx_multiple_message.add_location(
@@ -60,3 +64,4 @@ class TestMultipleMessage():
         assert isinstance(multiple_message, MultipleMessage)
         assert id(fx_multiple_message) == id(multiple_message)
         assert multiple_message.is_valid()
+        assert multiple_message.event_type == '140177271400161403'

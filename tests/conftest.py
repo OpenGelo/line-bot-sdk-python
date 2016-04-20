@@ -55,6 +55,11 @@ def fx_multiple_message(fx_client):
     return builders.MultipleMessage(fx_client)
 
 
+@pytest.fixture
+def fx_rich_message(fx_client):
+    return builders.RichMessage(fx_client)
+
+
 @pytest.yield_fixture
 def mocking():
     params = {

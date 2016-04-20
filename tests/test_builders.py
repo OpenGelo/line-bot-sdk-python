@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import json
 import responses
 
 from linebot.builders import MultipleMessage, RichMessage
@@ -251,3 +252,36 @@ class TestRichMessage():
     def test_instance_creation(self, fx_client):
         rich_message = RichMessage(fx_client)
         assert isinstance(rich_message, RichMessage)
+
+    @responses.activate
+    def test_send_setting_action_and_adding_listener(self, fx_rich_message, mocking):
+        text = 'manga'
+        action = 'MANGA'
+        x, y, w, h = 0, 0, 520, 520
+        link_url = 'link_url'
+        image_url = 'image_url'
+        alt_text = 'alt_text'
+        response = (
+            fx_rich_message
+            .set_action(MANGA={'text': text, 'link_url': link_url})
+            .add_listener(action=action, x=x, y=y, width=w, height=h)
+            .send(to_mid=[mocking['mid']], image_url=image_url, alt_text=alt_text)
+        )
+        assert response.status_code == 200
+        assert fx_rich_message.event_type == '138311608800106203'
+        assert fx_rich_message.content['contentType'] == 12
+        assert fx_rich_message.content['toType'] == 1
+        assert fx_rich_message.content['contentMetadata']['DOWNLOAD_URL'] == image_url
+        assert fx_rich_message.content['contentMetadata']['SPEC_REV'] == 1
+        assert fx_rich_message.content['contentMetadata']['ALT_TEXT'] == alt_text
+        assert json.loads(fx_rich_message.content['contentMetadata']['MARKUP_JSON']) == {
+            'images': {'image1': {'y': 0, 'x': 0, 'w': 1040, 'h': h}},
+            'canvas': {'initialScene': 'scene1', 'width': 1040, 'height': h},
+            'scenes': {
+                'scene1': {
+                    'listeners': [{'action': action, 'params': [x, y, w, h], 'type': 'touch'}],
+                    'draws': {'y': 0, 'x': 0, 'image': 'image1', 'w': 1040, 'h': h}
+                }
+            },
+            'actions': {action: {'text': text, 'type': 'web', 'params': {'linkUri': link_url}}},
+        }

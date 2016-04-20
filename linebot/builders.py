@@ -48,3 +48,10 @@ class MultipleMessage():
             preview_url=attrs['preview_url'],
         )
         return self.push_message(message)
+
+    def add_audio(self, **attrs):
+        message = messages.AudioMessage(
+            audio_url=attrs['audio_url'],
+            duration=attrs['duration'],
+        )
+        return self.push_message(message)

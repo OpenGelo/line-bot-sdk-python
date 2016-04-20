@@ -14,6 +14,8 @@ class TestLineBotClient():
         }
         LineBotClient(**credentials)
 
+
+class TestLineBotClientSendMessages():
     @responses.activate
     def test_send_text(self, fx_client, mocking):
         response = fx_client.send_text(to_mid=[mocking['mid']], text='')

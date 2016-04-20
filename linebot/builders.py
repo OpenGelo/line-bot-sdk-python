@@ -98,27 +98,6 @@ class RichMessage():
             },
         }
 
-    def add_listener(self, **attrs):
-        if not self.__validate_listener_attributes(attrs):
-            raise ValueError('Invalid arguments, :x [Fixnum], :y [Fixnum], :width [Fixnum], :height [Fixnum] keys.')
-
-        listener = {
-            'type': 'touch',  # Fixed value
-            'params': [attrs['x'], attrs['y'], attrs['width'], attrs['height']],
-            'action': attrs['action'],
-        }
-        self.__listeners.append(listener)
-        return self
-
-    def __validate_listener_attributes(attrs):
-        return (
-            isinstance(attrs['action'], str) and
-            isinstance(attrs['x'], int) and
-            isinstance(attrs['y'], int) and
-            isinstance(attrs['width'], int) and
-            isinstance(attrs['height'], int)
-        )
-
     def __create_markup_json(self):
         height = self.__determine_height()
         return json.dumps({
@@ -149,3 +128,24 @@ class RichMessage():
                 },
             },
         })
+
+    def add_listener(self, **attrs):
+        if not self.__validate_listener_attributes(attrs):
+            raise ValueError('Invalid arguments, :x [Fixnum], :y [Fixnum], :width [Fixnum], :height [Fixnum] keys.')
+
+        listener = {
+            'type': 'touch',  # Fixed value
+            'params': [attrs['x'], attrs['y'], attrs['width'], attrs['height']],
+            'action': attrs['action'],
+        }
+        self.__listeners.append(listener)
+        return self
+
+    def __validate_listener_attributes(attrs):
+        return (
+            isinstance(attrs['action'], str) and
+            isinstance(attrs['x'], int) and
+            isinstance(attrs['y'], int) and
+            isinstance(attrs['width'], int) and
+            isinstance(attrs['height'], int)
+        )

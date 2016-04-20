@@ -155,9 +155,7 @@ class RichMessage():
             raise ValueError('Invalid arguments, :text, :link_url keys.')
 
     def add_listener(self, **attrs):
-        if not self.__validate_listener_attributes(attrs):
-            raise ValueError('Invalid arguments, :x [Fixnum], :y [Fixnum], :width [Fixnum], :height [Fixnum] keys.')
-
+        self.__validate_listener_attributes(attrs)
         listener = {
             'type': 'touch',  # Fixed value
             'params': [attrs['x'], attrs['y'], attrs['width'], attrs['height']],
@@ -166,11 +164,12 @@ class RichMessage():
         self.__listeners.append(listener)
         return self
 
-    def __validate_listener_attributes(attrs):
-        return (
+    def __validate_listener_attributes(self, attrs):
+        if not (
             isinstance(attrs['action'], str) and
             isinstance(attrs['x'], int) and
             isinstance(attrs['y'], int) and
             isinstance(attrs['width'], int) and
             isinstance(attrs['height'], int)
-        )
+        ):
+            raise ValueError('Invalid arguments, :x [Fixnum], :y [Fixnum], :width [Fixnum], :height [Fixnum] keys.')

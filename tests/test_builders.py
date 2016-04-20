@@ -2,7 +2,7 @@
 
 import responses
 
-from linebot.builders import MultipleMessage
+from linebot.builders import MultipleMessage, RichMessage
 
 
 class TestMultipleMessage():
@@ -245,3 +245,9 @@ class TestMultipleMessage():
 
         response = multiple_message.send(to_mid=[mocking['mid']])
         assert response.status_code == 200
+
+
+class TestRichMessage():
+    def test_instance_creation(self, fx_client):
+        rich_message = RichMessage(fx_client)
+        assert isinstance(rich_message, RichMessage)

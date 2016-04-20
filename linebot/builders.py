@@ -71,3 +71,8 @@ class MultipleMessage():
             stkver=attrs['stkver'],
         )
         return self.push_message(message)
+
+
+class RichMessage():
+    def __init__(self, client):
+        self.__client = client

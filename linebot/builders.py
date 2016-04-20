@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import json
+
 from linebot import messages
+from linebot.constants import ContentType
 
 
 class MultipleMessage():
@@ -80,3 +83,47 @@ class RichMessage():
     @property
     def event_type(self):
         return '138311608800106203'
+
+    @property
+    def content(self):
+        return {
+            'contentType': ContentType.RICH_MESSAGE.value,
+            'toType': 1,  # 1 => user
+            'contentMetadata': {
+                'DOWNLOAD_URL': self.__image_url,
+                'SPEC_REV': 1,  # Fixed value
+                'ALT_TEXT': self.__alt_text,
+                'MARKUP_JSON': self.__create_markup_json(),
+            },
+        }
+
+    def __create_markup_json(self):
+        height = self.__determine_height()
+        return json.dumps({
+            'canvas': {
+                'height': height,
+                'width': 1040,  # Fixed value
+                'initialScene': 'scene1',  # Fixed value
+            },
+            'images': {
+                'image1': {
+                    'x': 0,  # Fixed value
+                    'y': 0,  # Fixed value
+                    'w': 1040,  # Fixed value
+                    'h': height,
+                },
+            },
+            'actions': self.__actions,
+            'scenes': {
+                'scene1': {
+                    'draws': {
+                        'image': 'image1',
+                        'x': 0,  # Fixed value
+                        'y': 0,  # Fixed value
+                        'w': 1040,  # This value must be same as the image width
+                        'h': height
+                    },
+                    'listeners': self.__listeners,
+                },
+            },
+        })

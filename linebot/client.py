@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import base64
+import hashlib
+import hmac
+
 from linebot import constants
 from linebot import messages
 from linebot.requests import Request
@@ -12,6 +16,10 @@ class LineBotClient():
             'X-Line-ChannelSecret': credentials['channel_secret'],
             'X-Line-Trusted-User-With-ACL': credentials['channel_mid'],
         }
+
+    def validate_signature(self, signature, content):
+        hash = hmac.new(self.credentials['X-Line-ChannelSecret'], content, hashlib.sha256).digest()
+        return signature == base64.b64encode(hash)
 
     def send_message(self, to_mid, message):
         request = Request(**{

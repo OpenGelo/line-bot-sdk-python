@@ -15,6 +15,16 @@ class TestLineBotClient():
         LineBotClient(**credentials)
 
 
+class TestSignatureValidation():
+    def test_validate_signature_valid(self, fx_client, fx_signature, fx_request_content):
+        result = fx_client.validate_signature(fx_signature, fx_request_content)
+        assert result is True
+
+    def test_validate_signature_invalid(self, fx_client, fx_request_content):
+        result = fx_client.validate_signature('', fx_request_content)
+        assert result is False
+
+
 class TestLineBotClientSendMessages():
     @responses.activate
     def test_send_text(self, fx_client, mocking):

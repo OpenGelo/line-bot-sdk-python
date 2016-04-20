@@ -38,3 +38,10 @@ class MultipleMessage():
             preview_url=attrs['preview_url'],
         )
         return self.push_message(message)
+
+    def add_video(self, **attrs):
+        message = messages.VideoMessage(
+            video_url=attrs['video_url'],
+            preview_url=attrs['preview_url'],
+        )
+        return self.push_message(message)

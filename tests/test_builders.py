@@ -27,3 +27,11 @@ class TestMultipleMessage():
         )
         assert isinstance(multiple_message, MultipleMessage)
         assert id(fx_multiple_message) == id(multiple_message)
+
+    def test_add_video(self, fx_multiple_message):
+        multiple_message = fx_multiple_message.add_video(
+            video_url='video_url',
+            preview_url='preview_url',
+        )
+        assert isinstance(multiple_message, MultipleMessage)
+        assert id(fx_multiple_message) == id(multiple_message)

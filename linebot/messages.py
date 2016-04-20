@@ -5,7 +5,10 @@ class MessageBase(object):
     def __init__(self, **attrs):
         self._attrs = attrs
         self.content = self._create_content()
-        self.event_type = '138311608800106203'
+
+    @property
+    def event_type(self):
+        return '138311608800106203'
 
     def _create_content(self):
         raise NotImplementedError

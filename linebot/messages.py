@@ -4,11 +4,15 @@
 class MessageBase(object):
     def __init__(self, **attrs):
         self.__attrs = attrs
-        self.content = self._create_content()
+        self.__content = self._create_content()
 
     @property
     def attrs(self):
         return self.__attrs
+
+    @property
+    def content(self):
+        return self.__content
 
     @property
     def event_type(self):

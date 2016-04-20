@@ -20,3 +20,7 @@ class TestConstants():
         assert constants.ContentType.STICKER.value == 8
         assert constants.ContentType.CONTACT.value == 10
         assert constants.ContentType.RICH_MESSAGE.value == 12
+
+    def test_receive_event_type(self):
+        assert constants.ReceiveEventType.MESSAGE == 138311609000106303
+        assert constants.ReceiveEventType.OPERATION == 138311609100106403

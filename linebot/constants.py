@@ -20,3 +20,8 @@ class ContentType(enum.Enum):
     STICKER = 8
     CONTACT = 10
     RICH_MESSAGE = 12
+
+
+class ReceiveEventType(enum.IntEnum):
+    MESSAGE = 138311609000106303
+    OPERATION = 138311609100106403

@@ -36,3 +36,12 @@ class TestLineBotClient():
             preview_url='',
         )
         assert response.status_code == 200
+
+    @responses.activate
+    def test_send_audio(self, fx_client, mocking):
+        response = fx_client.send_audio(
+            to_mid=[mocking['mid']],
+            audio_url='audio_url',
+            duration=240000,
+        )
+        assert response.status_code == 200

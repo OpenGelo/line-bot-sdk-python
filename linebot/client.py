@@ -40,3 +40,10 @@ class LineBotClient():
             preview_url=attrs['preview_url'],
         )
         return self.send_message(attrs['to_mid'], message)
+
+    def send_audio(self, **attrs):
+        message = messages.AudioMessage(
+            audio_url=attrs['audio_url'],
+            duration=attrs['duration'],
+        )
+        return self.send_message(attrs['to_mid'], message)

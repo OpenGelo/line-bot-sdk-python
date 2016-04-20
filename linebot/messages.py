@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from linebot.constants import ContentType
+
 
 class MessageBase(object):
     def __init__(self, **attrs):
@@ -28,7 +30,7 @@ class MessageBase(object):
 class TextMessage(MessageBase):
     def _create_content(self):
         return {
-            'contentType': 1,  # Fixed value
+            'contentType': ContentType.TEXT,
             'toType': 1,  # 1 => user
             'text': self.attrs['text'],
         }
@@ -40,7 +42,7 @@ class TextMessage(MessageBase):
 class ImageMessage(MessageBase):
     def _create_content(self):
         return {
-            'contentType': 2,  # Fixed value
+            'contentType': ContentType.IMAGE,
             'toType': 1,  # 1 => user
             'originalContentUrl': self.attrs['image_url'],
             'previewImageUrl': self.attrs['preview_url'],
@@ -53,7 +55,7 @@ class ImageMessage(MessageBase):
 class VideoMessage(MessageBase):
     def _create_content(self):
         return {
-            'contentType': 3,  # Fixed value
+            'contentType': ContentType.VIDEO,
             'toType': 1,  # 1 => user
             'originalContentUrl': self.attrs['video_url'],
             'previewImageUrl': self.attrs['preview_url'],
@@ -66,7 +68,7 @@ class VideoMessage(MessageBase):
 class AudioMessage(MessageBase):
     def _create_content(self):
         return {
-            'contentType': 4,  # Fixed value
+            'contentType': ContentType.AUDIO,
             'toType': 1,  # 1 => user
             'originalContentUrl': self.attrs['audio_url'],
             'contentMetadata': {
@@ -82,7 +84,7 @@ class LocationMessage(MessageBase):
     def _create_content(self):
         address = self.attrs.get('address')
         return {
-            'contentType': 7,  # Fixed value
+            'contentType': ContentType.LOCATION,
             'toType': 1,  # 1 => user
             'text': address or self.attrs['title'],
             'location': {
@@ -100,7 +102,7 @@ class LocationMessage(MessageBase):
 class StickerMessage(MessageBase):
     def _create_content(self):
         return {
-            'contentType': 8,  # Fixed value
+            'contentType': ContentType.STICKER,
             'toType': 1,  # 1 => user
             'contentMetadata': {
                 'STKPKGID': str(self.attrs['stkpkgid']),

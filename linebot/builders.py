@@ -55,3 +55,11 @@ class MultipleMessage():
             duration=attrs['duration'],
         )
         return self.push_message(message)
+
+    def add_location(self, **attrs):
+        message = messages.LocationMessage(
+            title=attrs['title'],
+            latitude=attrs['latitude'],
+            longitude=attrs['longitude'],
+        )
+        return self.push_message(message)

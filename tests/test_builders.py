@@ -50,3 +50,13 @@ class TestMultipleMessage():
         assert isinstance(multiple_message, MultipleMessage)
         assert id(fx_multiple_message) == id(multiple_message)
         assert multiple_message.is_valid()
+
+    def test_add_location(self, fx_multiple_message):
+        multiple_message = fx_multiple_message.add_location(
+            title='Convention center',
+            latitude=35.61823286112982,
+            longitude=139.72824096679688,
+        )
+        assert isinstance(multiple_message, MultipleMessage)
+        assert id(fx_multiple_message) == id(multiple_message)
+        assert multiple_message.is_valid()

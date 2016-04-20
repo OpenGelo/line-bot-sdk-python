@@ -77,3 +77,14 @@ class TestLineBotClientSendMessages():
             stkver=100,
         )
         assert response.status_code == 200
+
+
+class TestLineBotClientSendMultipleMessages():
+    @responses.activate
+    def test_send(self, fx_client, mocking):
+        response = (
+            fx_client.multiple_message
+            .add_text(text='')
+            .send(to_mid=[mocking['mid']])
+        )
+        assert response.status_code == 200

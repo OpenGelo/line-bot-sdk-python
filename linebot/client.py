@@ -4,6 +4,7 @@ import base64
 import hashlib
 import hmac
 
+from linebot import builders
 from linebot import constants
 from linebot import messages
 from linebot.requests import Request
@@ -22,6 +23,10 @@ class LineBotClient():
             signature,
             base64.b64encode(hmac.new(self.credentials['X-Line-ChannelSecret'], content, hashlib.sha256).digest())
         )
+
+    @property
+    def multiple_message(self):
+        return builders.MultipleMessage(self)
 
     def send_message(self, to_mid, message):
         request = Request(**{

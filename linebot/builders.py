@@ -99,6 +99,11 @@ class RichMessage():
             },
         }
 
+    def send(self, **attrs):
+        self.__image_url = attrs['image_url']
+        self.__alt_text = attrs['alt_text']
+        return self.__client.send_message(attrs['to_mid'], self)
+
     def __create_markup_json(self):
         height = self.__determine_height()
         return json.dumps({

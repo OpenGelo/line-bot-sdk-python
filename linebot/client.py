@@ -47,3 +47,13 @@ class LineBotClient():
             duration=attrs['duration'],
         )
         return self.send_message(attrs['to_mid'], message)
+
+    def send_location(self, **attrs):
+        address = attrs.get('address')
+        message = messages.LocationMessage(
+            title=attrs['title'],
+            address=address,
+            latitude=attrs['latitude'],
+            longitude=attrs['longitude'],
+        )
+        return self.send_message(attrs['to_mid'], message)

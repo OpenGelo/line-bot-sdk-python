@@ -45,3 +45,13 @@ class TestLineBotClient():
             duration=240000,
         )
         assert response.status_code == 200
+
+    @responses.activate
+    def test_send_location(self, fx_client, mocking):
+        response = fx_client.send_location(
+            to_mid=[mocking['mid']],
+            title='Convention center',
+            latitude=35.61823286112982,
+            longitude=139.72824096679688,
+        )
+        assert response.status_code == 200

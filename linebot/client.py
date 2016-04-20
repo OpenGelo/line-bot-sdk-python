@@ -57,3 +57,11 @@ class LineBotClient():
             longitude=attrs['longitude'],
         )
         return self.send_message(attrs['to_mid'], message)
+
+    def send_sticker(self, **attrs):
+        message = messages.StickerMessage(
+            stkpkgid=attrs['stkpkgid'],
+            stkid=attrs['stkid'],
+            stkver=attrs['stkver'],
+        )
+        return self.send_message(attrs['to_mid'], message)

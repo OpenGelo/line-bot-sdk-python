@@ -55,3 +55,13 @@ class TestLineBotClient():
             longitude=139.72824096679688,
         )
         assert response.status_code == 200
+
+    @responses.activate
+    def test_send_sticker(self, fx_client, mocking):
+        response = fx_client.send_sticker(
+            to_mid=[mocking['mid']],
+            stkpkgid=332,
+            stkid=3,
+            stkver=100,
+        )
+        assert response.status_code == 200

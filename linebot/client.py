@@ -28,6 +28,10 @@ class LineBotClient():
     def multiple_message(self):
         return builders.MultipleMessage(self)
 
+    @property
+    def rich_message(self):
+        return builders.RichMessage(self)
+
     def send_message(self, to_mid, message):
         request = Request(**{
             'url': constants.API_URL_EVENTS,

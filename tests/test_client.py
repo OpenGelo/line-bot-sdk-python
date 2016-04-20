@@ -88,3 +88,14 @@ class TestLineBotClientSendMultipleMessages():
             .send(to_mid=[mocking['mid']])
         )
         assert response.status_code == 200
+
+class TestLineBotClientSendRichMessages():
+    @responses.activate
+    def test_send(self, fx_client, mocking):
+        response = (
+            fx_client.rich_message
+            .set_action(MANGA={'text': 'manga', 'link_url': 'link_url'})
+            .add_listener(action='MANGA', x=0, y=0, width=520, height=520)
+            .send(to_mid=[mocking['mid']], image_url='image_url', alt_text='alt_text')
+        )
+        assert response.status_code == 200

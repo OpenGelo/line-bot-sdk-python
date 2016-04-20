@@ -12,11 +12,11 @@ class TestConstants():
         assert constants.TO_CHANNEL == 1383378250
 
     def test_content_type(self):
-        assert constants.ContentType.TEXT == 1
-        assert constants.ContentType.IMAGE == 2
-        assert constants.ContentType.VIDEO == 3
-        assert constants.ContentType.AUDIO == 4
-        assert constants.ContentType.LOCATION == 7
-        assert constants.ContentType.STICKER == 8
-        assert constants.ContentType.CONTACT == 10
-        assert constants.ContentType.RICH_MESSAGE == 12
+        assert constants.ContentType.TEXT.value == 1
+        assert constants.ContentType.IMAGE.value == 2
+        assert constants.ContentType.VIDEO.value == 3
+        assert constants.ContentType.AUDIO.value == 4
+        assert constants.ContentType.LOCATION.value == 7
+        assert constants.ContentType.STICKER.value == 8
+        assert constants.ContentType.CONTACT.value == 10
+        assert constants.ContentType.RICH_MESSAGE.value == 12

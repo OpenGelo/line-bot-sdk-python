@@ -30,7 +30,7 @@ class MessageBase(object):
 class TextMessage(MessageBase):
     def _create_content(self):
         return {
-            'contentType': ContentType.TEXT,
+            'contentType': ContentType.TEXT.value,
             'toType': 1,  # 1 => user
             'text': self.attrs['text'],
         }
@@ -42,7 +42,7 @@ class TextMessage(MessageBase):
 class ImageMessage(MessageBase):
     def _create_content(self):
         return {
-            'contentType': ContentType.IMAGE,
+            'contentType': ContentType.IMAGE.value,
             'toType': 1,  # 1 => user
             'originalContentUrl': self.attrs['image_url'],
             'previewImageUrl': self.attrs['preview_url'],
@@ -55,7 +55,7 @@ class ImageMessage(MessageBase):
 class VideoMessage(MessageBase):
     def _create_content(self):
         return {
-            'contentType': ContentType.VIDEO,
+            'contentType': ContentType.VIDEO.value,
             'toType': 1,  # 1 => user
             'originalContentUrl': self.attrs['video_url'],
             'previewImageUrl': self.attrs['preview_url'],
@@ -68,7 +68,7 @@ class VideoMessage(MessageBase):
 class AudioMessage(MessageBase):
     def _create_content(self):
         return {
-            'contentType': ContentType.AUDIO,
+            'contentType': ContentType.AUDIO.value,
             'toType': 1,  # 1 => user
             'originalContentUrl': self.attrs['audio_url'],
             'contentMetadata': {
@@ -84,7 +84,7 @@ class LocationMessage(MessageBase):
     def _create_content(self):
         address = self.attrs.get('address')
         return {
-            'contentType': ContentType.LOCATION,
+            'contentType': ContentType.LOCATION.value,
             'toType': 1,  # 1 => user
             'text': address or self.attrs['title'],
             'location': {
@@ -102,7 +102,7 @@ class LocationMessage(MessageBase):
 class StickerMessage(MessageBase):
     def _create_content(self):
         return {
-            'contentType': ContentType.STICKER,
+            'contentType': ContentType.STICKER.value,
             'toType': 1,  # 1 => user
             'contentMetadata': {
                 'STKPKGID': str(self.attrs['stkpkgid']),

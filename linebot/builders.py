@@ -5,14 +5,14 @@ from linebot import messages
 
 class MultipleMessage():
     def __init__(self, client):
-        self.messages = []
-        self.client = client
+        self.__messages = []
+        self.__client = client
 
     @property
     def content(self):
         return {
             'messageNotified': 0,
-            'messages': self.messages,
+            'messages': self.__messages,
         }
 
     @property
@@ -20,12 +20,12 @@ class MultipleMessage():
         return '140177271400161403'
 
     def send(self, to_mid):
-        return self.client.send_message(to_mid, self)
+        return self.__client.send_message(to_mid, self)
 
     def push_message(self, message):
         if not message.is_valid():
             raise ValueError('Invalid value')
-        self.messages.append(message.content)
+        self.__messages.append(message.content)
         return self
 
     def add_text(self, **attrs):

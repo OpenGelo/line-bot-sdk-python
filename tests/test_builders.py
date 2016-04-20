@@ -19,3 +19,11 @@ class TestMultipleMessage():
         multiple_message = fx_multiple_message.add_text(text='')
         assert isinstance(multiple_message, MultipleMessage)
         assert id(fx_multiple_message) == id(multiple_message)
+
+    def test_add_image(self, fx_multiple_message):
+        multiple_message = fx_multiple_message.add_image(
+            image_url='image_url',
+            preview_url='preview_url',
+        )
+        assert isinstance(multiple_message, MultipleMessage)
+        assert id(fx_multiple_message) == id(multiple_message)

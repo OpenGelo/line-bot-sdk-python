@@ -31,3 +31,10 @@ class MultipleMessage():
     def add_text(self, **attrs):
         message = messages.TextMessage(text=attrs['text'])
         return self.push_message(message)
+
+    def add_image(self, **attrs):
+        message = messages.ImageMessage(
+            image_url=attrs['image_url'],
+            preview_url=attrs['preview_url'],
+        )
+        return self.push_message(message)

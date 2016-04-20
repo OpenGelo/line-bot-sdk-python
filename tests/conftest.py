@@ -3,6 +3,7 @@
 import pytest
 import responses
 
+from linebot import builders
 from linebot import constants
 from linebot import messages
 from linebot.client import LineBotClient
@@ -47,6 +48,11 @@ def fx_client(fx_channel_id, fx_channel_secret, fx_channel_mid):
 @pytest.fixture
 def fx_message():
     return messages.TextMessage(text='')
+
+
+@pytest.fixture
+def fx_multiple_message(fx_client):
+    return builders.MultipleMessage(fx_client)
 
 
 @pytest.yield_fixture

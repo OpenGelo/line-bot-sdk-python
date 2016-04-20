@@ -11,6 +11,9 @@ class Receive():
         result = parsed_json['result']
         self.__data = [self.__generate_data(datum) for datum in result]
 
+    def __getitem__(self, index):
+        return self.__data[index]
+
     def __generate_data(self, datum):
         event_type = int(datum['eventType'])
         if event_type == ReceiveEventType.MESSAGE:

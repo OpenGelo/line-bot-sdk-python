@@ -60,3 +60,25 @@ class TestMessages():
                 'AUDLEN': str(duration),
             },
         }
+
+    def test_location_message(self):
+        title = 'Convention center'
+        latitude = 35.61823286112982
+        longitude = 139.72824096679688
+        message = messages.LocationMessage(
+            title=title,
+            latitude=latitude,
+            longitude=longitude,
+        )
+        assert message.event_type == '138311608800106203'
+        assert message.content == {
+            'contentType': 7,
+            'toType': 1,
+            'text': title,
+            'location': {
+                'title': title,
+                'address': None,
+                'latitude': latitude,
+                'longitude': longitude,
+            },
+        }

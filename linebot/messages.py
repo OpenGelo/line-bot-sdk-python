@@ -65,3 +65,22 @@ class AudioMessage(MessageBase):
 
     def is_valid(self):
         return self._attrs['audio_url'] and self._attrs['duration']
+
+
+class LocationMessage(MessageBase):
+    def _create_content(self):
+        address = self._attrs.get('address')
+        return {
+            'contentType': 7,  # Fixed value
+            'toType': 1,  # 1 => user
+            'text': address or self._attrs['title'],
+            'location': {
+                'title': self._attrs['title'],
+                'address': address,
+                'latitude': self._attrs['latitude'],
+                'longitude': self._attrs['longitude'],
+            },
+        }
+
+    def is_valid(self):
+        return self._attrs['title'] and self._attrs['latitude'] and self._attrs['longitude']

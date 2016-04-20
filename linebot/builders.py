@@ -63,3 +63,11 @@ class MultipleMessage():
             longitude=attrs['longitude'],
         )
         return self.push_message(message)
+
+    def add_sticker(self, **attrs):
+        message = messages.StickerMessage(
+            stkpkgid=attrs['stkpkgid'],
+            stkid=attrs['stkid'],
+            stkver=attrs['stkver'],
+        )
+        return self.push_message(message)

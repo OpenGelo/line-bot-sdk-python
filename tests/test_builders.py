@@ -136,3 +136,31 @@ class TestMultipleMessage():
                 },
             ],
         }
+
+    def test_add_sticker(self, fx_multiple_message):
+        stkpkgid = 332
+        stkid = 3
+        stkver = 100
+        multiple_message = fx_multiple_message.add_sticker(
+            stkpkgid=stkpkgid,
+            stkid=stkid,
+            stkver=stkver,
+        )
+        assert isinstance(multiple_message, MultipleMessage)
+        assert id(fx_multiple_message) == id(multiple_message)
+        assert multiple_message.is_valid()
+        assert multiple_message.event_type == '140177271400161403'
+        assert multiple_message.content == {
+            'messageNotified': 0,
+            'messages': [
+                {
+                    'contentType': 8,
+                    'contentMetadata': {
+                        'STKPKGID': str(stkpkgid),
+                        'STKID': str(stkid),
+                        'STKVER': str(stkver),
+                    },
+                    'toType': 1,
+                },
+            ],
+        }

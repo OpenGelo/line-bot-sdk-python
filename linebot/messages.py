@@ -84,3 +84,19 @@ class LocationMessage(MessageBase):
 
     def is_valid(self):
         return self._attrs['title'] and self._attrs['latitude'] and self._attrs['longitude']
+
+
+class StickerMessage(MessageBase):
+    def _create_content(self):
+        return {
+            'contentType': 8,  # Fixed value
+            'toType': 1,  # 1 => user
+            'contentMetadata': {
+                'STKPKGID': str(self._attrs['stkpkgid']),
+                'STKID': str(self._attrs['stkid']),
+                'STKVER': str(self._attrs['stkver']),
+            },
+        }
+
+    def is_valid(self):
+        return self._attrs['stkpkgid'] and self._attrs['stkid'] and self._attrs['stkver']

@@ -82,3 +82,23 @@ class TestMessages():
                 'longitude': longitude,
             },
         }
+
+    def test_sticker_message(self):
+        stkpkgid = 332
+        stkid = 3
+        stkver = 100
+        message = messages.StickerMessage(
+            stkpkgid=stkpkgid,
+            stkid=stkid,
+            stkver=stkver,
+        )
+        assert message.event_type == '138311608800106203'
+        assert message.content == {
+            'contentType': 8,
+            'toType': 1,
+            'contentMetadata': {
+                'STKPKGID': str(stkpkgid),
+                'STKID': str(stkid),
+                'STKVER': str(stkver),
+            },
+        }

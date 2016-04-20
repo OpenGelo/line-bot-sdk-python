@@ -43,3 +43,20 @@ class TestMessages():
             'originalContentUrl': video_url,
             'previewImageUrl': preview_url,
         }
+
+    def test_audio_message(self):
+        audio_url = 'audio_url'
+        duration = 240000
+        message = messages.AudioMessage(
+            audio_url=audio_url,
+            duration=duration,
+        )
+        assert message.event_type == '138311608800106203'
+        assert message.content == {
+            'contentType': 4,
+            'toType': 1,
+            'originalContentUrl': audio_url,
+            'contentMetadata': {
+                'AUDLEN': str(duration),
+            },
+        }

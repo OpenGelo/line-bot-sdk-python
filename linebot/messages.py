@@ -50,3 +50,18 @@ class VideoMessage(MessageBase):
 
     def is_valid(self):
         return self._attrs['video_url'] and self._attrs['preview_url']
+
+
+class AudioMessage(MessageBase):
+    def _create_content(self):
+        return {
+            'contentType': 4,  # Fixed value
+            'toType': 1,  # 1 => user
+            'originalContentUrl': self._attrs['audio_url'],
+            'contentMetadata': {
+                'AUDLEN': str(self._attrs['duration']),
+            },
+        }
+
+    def is_valid(self):
+        return self._attrs['audio_url'] and self._attrs['duration']

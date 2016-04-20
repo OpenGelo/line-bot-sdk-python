@@ -19,10 +19,13 @@ class MultipleMessage():
     def event_type(self):
         return '140177271400161403'
 
+    def send(self, to_mid):
+        return self.client.send_message(to_mid, self)
+
     def push_message(self, message):
         if not message.is_valid():
             raise ValueError('Invalid value')
-        self.messages.append(message)
+        self.messages.append(message.content)
         return self
 
     def add_text(self, **attrs):

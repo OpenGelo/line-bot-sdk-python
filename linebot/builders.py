@@ -129,6 +129,14 @@ class RichMessage():
             },
         })
 
+    def __determine_height(self):
+        height = 0
+        for listener in self.__listeners:
+            h = listener['params'][1] + listener['params'][3]  # params.y + params.height
+            if height < h:
+                height = h
+        return 2080 if height > 2080 else height
+
     def add_listener(self, **attrs):
         if not self.__validate_listener_attributes(attrs):
             raise ValueError('Invalid arguments, :x [Fixnum], :y [Fixnum], :width [Fixnum], :height [Fixnum] keys.')

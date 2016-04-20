@@ -78,6 +78,7 @@ class MultipleMessage():
 
 class RichMessage():
     def __init__(self, client):
+        self.__listeners = []
         self.__client = client
 
     @property
@@ -96,6 +97,18 @@ class RichMessage():
                 'MARKUP_JSON': self.__create_markup_json(),
             },
         }
+
+    def add_listener(self, **attrs):
+        if not self.__validate_listener_attributes(attrs):
+            raise ValueError('Invalid arguments, :x [Fixnum], :y [Fixnum], :width [Fixnum], :height [Fixnum] keys.')
+
+        listener = {
+            'type': 'touch',  # Fixed value
+            'params': [attrs['x'], attrs['y'], attrs['width'], attrs['height']],
+            'action': attrs['action'],
+        }
+        self.__listeners.append(listener)
+        return self
 
     def __create_markup_json(self):
         height = self.__determine_height()

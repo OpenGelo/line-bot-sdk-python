@@ -19,6 +19,9 @@ class MultipleMessage():
     def event_type(self):
         return '140177271400161403'
 
+    def is_valid(self):
+        return len(self.__messages) > 0
+
     def send(self, to_mid):
         return self.__client.send_message(to_mid, self)
 

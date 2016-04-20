@@ -10,6 +10,9 @@ class TestMultipleMessage():
         multiple_message = MultipleMessage(fx_client)
         assert isinstance(multiple_message, MultipleMessage)
 
+    def test_invalid_multiple_message(self, fx_multiple_message):
+        assert not fx_multiple_message.is_valid()
+
     @responses.activate
     def test_send(self, fx_multiple_message, mocking):
         response = fx_multiple_message.add_text(text='').send(to_mid=[mocking['mid']])
@@ -19,6 +22,7 @@ class TestMultipleMessage():
         multiple_message = fx_multiple_message.add_text(text='')
         assert isinstance(multiple_message, MultipleMessage)
         assert id(fx_multiple_message) == id(multiple_message)
+        assert multiple_message.is_valid()
 
     def test_add_image(self, fx_multiple_message):
         multiple_message = fx_multiple_message.add_image(
@@ -27,6 +31,7 @@ class TestMultipleMessage():
         )
         assert isinstance(multiple_message, MultipleMessage)
         assert id(fx_multiple_message) == id(multiple_message)
+        assert multiple_message.is_valid()
 
     def test_add_video(self, fx_multiple_message):
         multiple_message = fx_multiple_message.add_video(
@@ -35,3 +40,4 @@ class TestMultipleMessage():
         )
         assert isinstance(multiple_message, MultipleMessage)
         assert id(fx_multiple_message) == id(multiple_message)
+        assert multiple_message.is_valid()

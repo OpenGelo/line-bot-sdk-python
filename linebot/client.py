@@ -18,8 +18,10 @@ class LineBotClient():
         }
 
     def validate_signature(self, signature, content):
-        hash = hmac.new(self.credentials['X-Line-ChannelSecret'], content, hashlib.sha256).digest()
-        return signature == base64.b64encode(hash)
+        return hmac.compare_digest(
+            signature,
+            base64.b64encode(hmac.new(self.credentials['X-Line-ChannelSecret'], content, hashlib.sha256).digest())
+        )
 
     def send_message(self, to_mid, message):
         request = Request(**{

@@ -78,6 +78,7 @@ class MultipleMessage():
 
 class RichMessage():
     def __init__(self, client):
+        self.__actions = {}
         self.__listeners = []
         self.__client = client
 
@@ -136,6 +137,22 @@ class RichMessage():
             if height < h:
                 height = h
         return 2080 if height > 2080 else height
+
+    def set_action(self, **attrs):
+        for key, value in attrs.items():
+            self.__validate_action_attributes(value)
+            self.__actions[str(key)] = {
+                'type': value.get('type') or 'web',
+                'text': str(value['text']),
+                'params': {
+                    'linkUri': str(value['link_url']),
+                },
+            }
+        return self
+
+    def __validate_action_attributes(self, attrs):
+        if not (attrs['text'] and attrs['link_url']):
+            raise ValueError('Invalid arguments, :text, :link_url keys.')
 
     def add_listener(self, **attrs):
         if not self.__validate_listener_attributes(attrs):

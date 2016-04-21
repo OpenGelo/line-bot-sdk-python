@@ -8,7 +8,7 @@ class TestUserProfile():
         for profile in fx_user_profiles:
             p = UserProfile(profile)
             assert isinstance(p, UserProfile)
-            assert p.mid == profile['mid']
-            assert p.display_name == profile['displayName']
-            assert p.picture_url == profile['pictureUrl']
-            assert p.status_message == profile['statusMessage']
+            assert p['mid'] == profile['mid']
+            assert p['display_name'] == profile['displayName']
+            assert p['picture_url'] == profile['pictureUrl']
+            assert p['status_message'] == profile['statusMessage']

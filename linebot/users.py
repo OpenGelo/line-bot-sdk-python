@@ -10,5 +10,5 @@ class UserProfile():
             'status_message': contact['statusMessage'],
         }
 
-    def __getattr__(self, key):
+    def __getitem__(self, key):
         return self.__profile[key]

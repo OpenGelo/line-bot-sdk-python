@@ -8,6 +8,9 @@ class MessageBase(object):
         self.__attrs = attrs
         self.__content = self._create_content()
 
+    def __getitem__(self, key):
+        return self.__content[key]
+
     @property
     def attrs(self):
         return self.__attrs

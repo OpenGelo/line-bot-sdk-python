@@ -16,6 +16,24 @@ def fx_request_content():
 
 
 @pytest.fixture
+def fx_user_profile():
+    return [
+        {
+            'displayName': 'BOT API1',
+            'mid': 'u0047556f2e40dba2456887320ba7c76d',
+            'pictureUrl': 'http://dl.profile.line.naver.jp/abcdefghijklmn',
+            'statusMessage': 'Hello, LINE!',
+        },
+        {
+            'displayName': 'BOT API2',
+            'mid': 'u0047556f2e40dba2456887320ba7c76e',
+            'pictureUrl': 'http://dl.profile.line.naver.jp/12345678',
+            'statusMessage': 'Hello, LINE+!',
+        },
+    ]
+
+
+@pytest.fixture
 def fx_json_request_content_text():
     return json.dumps({
         'result': [

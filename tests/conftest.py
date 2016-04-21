@@ -111,11 +111,17 @@ def fx_rich_message(fx_client):
     return builders.RichMessage(fx_client)
 
 
+@pytest.fixture
+def fx_message_id():
+    return 1234567
+
+
 @pytest.yield_fixture
-def mocking():
+def mocking(fx_message_id):
     params = {
         'message_id': '123456789',
         'mid': 'u0047556f2e40dba2456887320ba7c76d',
     }
     responses.add(responses.POST, 'https://trialbot-api.line.me/v1/events', status=200)
+    responses.add(responses.GET, 'https://trialbot-api.line.me/v1/bot/message/{}/content'.format(fx_message_id), status=200)
     yield params

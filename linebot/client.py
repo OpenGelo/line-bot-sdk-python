@@ -99,3 +99,15 @@ class LineBotClient():
             stkver=attrs['stkver'],
         )
         return self.send_message(attrs['to_mid'], message)
+
+    def __get(self, url):
+        request = Request(**{
+            'url': url,
+            'credentials': self.credentials,
+        })
+        return request.get()
+
+    def get_message_content(self, message_id):
+        path = ['bot', 'message', str(message_id), 'content']
+        url = self.__generate_url(*path)
+        return self.__get(url)

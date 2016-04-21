@@ -18,6 +18,9 @@ class Request():
     def validate(self):
         pass
 
+    def get(self):
+        return requests.get(self.url, headers=self.headers)
+
     def post(self):
         response = requests.post(
             self.url,

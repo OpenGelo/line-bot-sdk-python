@@ -123,13 +123,15 @@ class RichMessage():
             'actions': self.__actions,
             'scenes': {
                 'scene1': {
-                    'draws': {
-                        'image': 'image1',
-                        'x': 0,  # Fixed value
-                        'y': 0,  # Fixed value
-                        'w': 1040,  # This value must be same as the image width
-                        'h': height
-                    },
+                    'draws': [
+                        {
+                            'image': 'image1',
+                            'x': 0,  # Fixed value
+                            'y': 0,  # Fixed value
+                            'w': 1040,  # This value must be same as the image width
+                            'h': height
+                        },
+                    ],
                     'listeners': self.__listeners,
                 },
             },

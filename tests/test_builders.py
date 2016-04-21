@@ -280,8 +280,8 @@ class TestRichMessage():
             'scenes': {
                 'scene1': {
                     'listeners': [{'action': action, 'params': [x, y, w, h], 'type': 'touch'}],
-                    'draws': {'y': 0, 'x': 0, 'image': 'image1', 'w': 1040, 'h': h}
-                }
+                    'draws': [{'y': 0, 'x': 0, 'image': 'image1', 'w': 1040, 'h': h}],
+                },
             },
             'actions': {action: {'text': text, 'type': 'web', 'params': {'linkUri': link_url}}},
         }

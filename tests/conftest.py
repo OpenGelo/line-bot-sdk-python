@@ -15,7 +15,7 @@ def fx_request_content():
 
 
 @pytest.fixture
-def fx_user_profile():
+def fx_user_profiles():
     return [
         {
             'displayName': 'BOT API1',

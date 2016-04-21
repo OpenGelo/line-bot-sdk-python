@@ -18,15 +18,16 @@ class LineBotClient():
         api_version=constants.API_VERSION,
         **credentials
     ):
-        self.__base_url = self.__generate_url(api_base_url, api_version)
+        self.__base_url = api_base_url
+        self.__base_url = self.__generate_url(api_version)
         self.credentials = {
             'X-Line-ChannelID': credentials['channel_id'],
             'X-Line-ChannelSecret': credentials['channel_secret'],
             'X-Line-Trusted-User-With-ACL': credentials['channel_mid'],
         }
 
-    def __generate_url(self, url, *paths):
-        parsed_url = urlparse(url)
+    def __generate_url(self, *paths):
+        parsed_url = urlparse(self.__base_url)
         path = parsed_url.path.split('/')
         path.extend(paths)
         path = '/'.join(path)
@@ -48,7 +49,7 @@ class LineBotClient():
 
     def send_message(self, to_mid, message):
         request = Request(**{
-            'url': self.__generate_url(self.__base_url, 'events'),
+            'url': self.__generate_url('events'),
             'credentials': self.credentials,
             'to_mid': to_mid,
             'message': message,

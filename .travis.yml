@@ -1,9 +1,18 @@
 language: python
 cache: pip
 python:
-  - "2.7"
+- '2.7'
 install:
-  - "pip install -r requirements.txt"
-  - "pip install -r test_requirements.txt"
+- pip install -r requirements.txt
+- pip install -r test_requirements.txt
 script:
-  - "python runtests.py"
+- python runtests.py
+deploy:
+  provider: pypi
+  user: studio3104
+  password:
+    secure: MWLHifjEz8r2jcUWBlRppFK4fTQYjMTpcyBVmun4243slansG9UkUAtHtZNpXg4g2+013s2uetEGv18FBm36GUMlTsveK0KDkwB8BAYPRx4QmlPH/AmFBPf2LHhAcDOEG40c2Lqg7yLcEdR9f14QC9CAQgsdCnFWfcPpPIJK1vgPbMI1qzcew90PMzmM5aEyTgA2StvIbZH43E/C3OTNFVl/6qikLeJ98uIz9l2fTUHfLPjReJ03xP6Eavq+THGLaqjUcojAqfP5Omr/GS3oljWAjePxSWda8eiwnCvj+0XdNyVgIw5uxuqaTaatRnSIM9Oz+sFcL8h3S095r0LO+wl/3wwwmUmncyQrZSD4JD6HgCOeboxvCYzNimhwlIcpt5EAlRg1FLECQVtiG9UKh3o4bbcDohgiw4VnPE5yEBrV58+kUoUmtdFQjpqO/Fg5ibzq9AFxQDrQsEwCvqrkDEQJoc0PKE/dM9PAT24Y6c+m0lxPDuTp0fJP/ih+x8gTE6DmJkcH4XEA1vPn6BjPX7z8nuPCx5Kh716moraCmyLmvs88YUhsU3kIbWQdMHr4tJPlNzkSoxdhFtZ/x/Z+vNEK5AWqsVD0727dl6MRE61DCrEcjdEby2SuMOdiIHBICGplbRv+hPVvQtbmjAzTgCeqp79r2+6gbYY+671EOpc=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: studio3104/line-bot-sdk-python

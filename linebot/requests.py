@@ -13,7 +13,7 @@ class Request():
     def __init__(self, **kwargs):
         self.url = kwargs['url']
         self.headers = self.__create_headers(kwargs['credentials'])
-        self.payload = self.__create_payload(kwargs['to_mid'], kwargs['message'])
+        self.__attrs = kwargs
 
     def validate(self):
         pass
@@ -21,14 +21,19 @@ class Request():
     def post(self):
         response = requests.post(
             self.url,
-            data=self.payload,
+            data=self.__create_payload(),
             headers=self.headers,
         )
         return response
 
-    def __create_payload(self, to_mid, message):
+    def __create_to_mid(self):
+        to_mid = self.__attrs['to_mid']
+        return to_mid if isinstance(to_mid, list) else [to_mid]
+
+    def __create_payload(self):
+        message = self.__attrs['message']
         payload = {
-            'to': to_mid,
+            'to': self.__create_to_mid(),
             'toChannel': constants.TO_CHANNEL,
             'eventType': message.event_type,
             'content': message.content,

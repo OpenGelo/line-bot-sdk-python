@@ -22,9 +22,3 @@ class TestRequest():
             'X-Line-ChannelSecret': fx_client.credentials['X-Line-ChannelSecret'],
             'X-Line-Trusted-User-With-ACL': fx_client.credentials['X-Line-Trusted-User-With-ACL'],
         }
-        assert request.payload == json.dumps({
-            'to': [mocking['mid']],
-            'toChannel': constants.TO_CHANNEL,
-            'eventType': fx_message.event_type,
-            'content': fx_message.content,
-        })

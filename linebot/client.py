@@ -3,12 +3,14 @@
 import base64
 import hashlib
 import hmac
+import json
 from urlparse import urlparse, urljoin
 
 from linebot import builders
 from linebot import constants
 from linebot import messages
 from linebot.requests import Request
+from linebot.users import UserProfile
 
 
 class LineBotClient():
@@ -116,3 +118,9 @@ class LineBotClient():
         path = ['bot', 'message', str(message_id), 'content', 'preview']
         url = self.__generate_url(*path)
         return self.__get(url)
+
+    def get_user_profile(self, *mids):
+        url = self.__generate_url('profiles')
+        url = '{}?mids={}'.format(url, ','.join(mids))
+        response = self.__get(url)
+        return [UserProfile(contact) for contact in json.loads(response.content)['contacts']]

@@ -1,4 +1,4 @@
-# line-bot-sdk-python [![Build Status](https://travis-ci.org/studio3104/line-bot-sdk-python.svg?branch=master)](https://travis-ci.org/studio3104/line-bot-sdk-python)
+# line-bot-sdk-python [![PyPI version](https://badge.fury.io/py/linebot.svg)](https://badge.fury.io/py/linebot) [![Build Status](https://travis-ci.org/studio3104/line-bot-sdk-python.svg?branch=master)](https://travis-ci.org/studio3104/line-bot-sdk-python)
 
 ## Configuration
 

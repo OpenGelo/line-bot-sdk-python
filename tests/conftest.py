@@ -41,6 +41,31 @@ def fx_json_request_content_text():
 
 
 @pytest.fixture
+def fx_json_request_content_operation():
+    return json.dumps({
+        'result': [
+            {
+                'from': 'u206d25c2ea6bd87c17655609a1c37cb8',
+                'fromChannel': '1341301815',
+                'to': ['u0cc15697597f61dd8b01cea8b027050e'],
+                'toChannel': '1441301333',
+                'eventType': '138311609100106403',
+                'id': 'ABCDEF-12345678902',
+                'content': {
+                    'revision': 2469,
+                    'opType': 4,
+                    'params': [
+                        'u0f3bfc598b061eba02183bfc5280886a',
+                        None,
+                        None,
+                    ],
+                },
+            },
+        ],
+    })
+
+
+@pytest.fixture
 def fx_signature():
     return 'YdUyzEMBcQwsneRE8RkWm9/3AF+Zms+Mj1sh7d/biuc='
 

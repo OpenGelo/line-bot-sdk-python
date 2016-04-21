@@ -3,7 +3,8 @@
 import json
 
 from linebot import messages
-from linebot.constants import ContentType, ReceiveEventType
+from linebot import operations
+from linebot.constants import ContentType, OpType, ReceiveEventType
 
 
 class Receive():
@@ -81,4 +82,32 @@ class Message():
 
 class Operation():
     def __init__(self, datum):
-        pass
+        self.__data = {
+            'id': datum['id'],
+            'from_mid': datum['content']['params'][0],
+            'to_mid': datum['to'],
+            'from_channel_id': datum['fromChannel'],
+            'to_channel_id': datum['toChannel'],
+            'event_type': datum['eventType'],
+            'content': self.__generate_content(datum['content']),
+        }
+
+    def __getitem__(self, key):
+        return self.__data[key]
+
+    def __generate_content(self, attrs):
+        op_type = attrs['opType']
+        if op_type == OpType.ADDED_AS_FRIEND:
+            return operations.AddedAsFriend(
+                revision=attrs['revision'],
+                op_type=attrs['opType'],
+                params=attrs['params'],
+            )
+        elif op_type == OpType.BLOCKED_ACCOUNT:
+            return operations.BlockedAccount(
+                revision=attrs['revision'],
+                op_type=attrs['opType'],
+                params=attrs['params'],
+            )
+        else:
+            raise ValueError('Invalid op type.')

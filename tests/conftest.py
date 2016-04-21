@@ -124,4 +124,5 @@ def mocking(fx_message_id):
     }
     responses.add(responses.POST, 'https://trialbot-api.line.me/v1/events', status=200)
     responses.add(responses.GET, 'https://trialbot-api.line.me/v1/bot/message/{}/content'.format(fx_message_id), status=200)
+    responses.add(responses.GET, 'https://trialbot-api.line.me/v1/bot/message/{}/content/preview'.format(fx_message_id), status=200)
     yield params

@@ -111,3 +111,8 @@ class LineBotClient():
         path = ['bot', 'message', str(message_id), 'content']
         url = self.__generate_url(*path)
         return self.__get(url)
+
+    def get_message_content_preview(self, message_id):
+        path = ['bot', 'message', str(message_id), 'content', 'preview']
+        url = self.__generate_url(*path)
+        return self.__get(url)

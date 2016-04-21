@@ -32,6 +32,13 @@ class TestLineBotClientGetMessageContent():
         assert response.status_code == 200
 
 
+class TestLineBotClientGetMessageContentPreview():
+    @responses.activate
+    def test_get_message_content_preview(self, fx_client, fx_message_id, mocking):
+        response = fx_client.get_message_content_preview(fx_message_id)
+        assert response.status_code == 200
+
+
 class TestLineBotClientSendMessages():
     @responses.activate
     def test_send_text(self, fx_client, mocking):

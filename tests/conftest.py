@@ -117,5 +117,5 @@ def mocking():
         'message_id': '123456789',
         'mid': 'u0047556f2e40dba2456887320ba7c76d',
     }
-    responses.add(responses.POST, constants.API_URL_EVENTS, status=200)
+    responses.add(responses.POST, 'https://trialbot-api.line.me/v1/events', status=200)
     yield params

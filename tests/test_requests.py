@@ -8,13 +8,14 @@ from linebot.requests import Request
 
 class TestRequest():
     def test_request_instance_creation(self, fx_client, fx_message, mocking):
+        url = 'https://trialbot-api.line.me/v1/events'
         request = Request(
-            url=constants.API_URL_EVENTS,
+            url=url,
             credentials=fx_client.credentials,
             to_mid=[mocking['mid']],
             message=fx_message,
         )
-        assert request.url == constants.API_URL_EVENTS
+        assert request.url == url
         assert request.headers == {
             'Content-Type': 'application/json; charset=UTF-8',
             'X-Line-ChannelID': fx_client.credentials['X-Line-ChannelID'],

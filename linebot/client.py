@@ -3,6 +3,7 @@
 import base64
 import hashlib
 import hmac
+from urlparse import urlparse, urljoin
 
 from linebot import builders
 from linebot import constants
@@ -11,12 +12,25 @@ from linebot.requests import Request
 
 
 class LineBotClient():
-    def __init__(self, **credentials):
+    def __init__(
+        self,
+        api_base_url=constants.API_URL_BASE,
+        api_version=constants.API_VERSION,
+        **credentials
+    ):
+        self.__base_url = self.__generate_url(api_base_url, api_version)
         self.credentials = {
             'X-Line-ChannelID': credentials['channel_id'],
             'X-Line-ChannelSecret': credentials['channel_secret'],
             'X-Line-Trusted-User-With-ACL': credentials['channel_mid'],
         }
+
+    def __generate_url(self, url, *paths):
+        parsed_url = urlparse(url)
+        path = parsed_url.path.split('/')
+        path.extend(paths)
+        path = '/'.join(path)
+        return urljoin(parsed_url.geturl(), path)
 
     def validate_signature(self, signature, content):
         return hmac.compare_digest(
@@ -34,7 +48,7 @@ class LineBotClient():
 
     def send_message(self, to_mid, message):
         request = Request(**{
-            'url': constants.API_URL_EVENTS,
+            'url': self.__generate_url(self.__base_url, 'events'),
             'credentials': self.credentials,
             'to_mid': to_mid,
             'message': message,

@@ -5,7 +5,6 @@ import pytest
 import responses
 
 from linebot import builders
-from linebot import constants
 from linebot import messages
 from linebot.client import LineBotClient
 

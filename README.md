@@ -8,7 +8,7 @@ from linebot.client import LineBotClient
 credentials = {
     'channel_id': 'YOUR LINE BOT Channel ID',
     'channel_secret': 'YOUR LINE BOT Channel Secret',
-    'channel_mid': ''YOUR LINE BOT MID',
+    'channel_mid': 'YOUR LINE BOT MID',
 }
 client = LineBotClient(**credentials)
 ```
@@ -164,12 +164,4 @@ Get the preview image file which was sent by user.
 ```python
 client.get_user_profile('1234567', '8910112')
 #=> [<linebot.users.UserProfile instance at 0x000000000000>, <linebot.users.UserProfile instance at 0x000000000000>]
-```
-
-## Testing
-
-```sh
-pip install -r requirements.txt
-pip install -r test_requirements.txt
-python runtests.py
 ```

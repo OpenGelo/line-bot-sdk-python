@@ -35,7 +35,7 @@ class Message():
             'to_channel_id': datum['toChannel'],
             'event_type': datum['eventType'],
             'created_time': datum['content']['createdTime'],
-            'content': self.__generate_content(datum['content']).content,
+            'content': self.__generate_content(datum['content']),
         }
 
     def __getitem__(self, key):

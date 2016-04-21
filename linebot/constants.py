@@ -11,7 +11,7 @@ API_URL_EVENTS = urljoin(__parsed_base_url.geturl(), '{}/{}'.format(API_VERSION,
 TO_CHANNEL = 1383378250
 
 
-class ContentType(enum.Enum):
+class ContentType(enum.IntEnum):
     TEXT = 1
     IMAGE = 2
     VIDEO = 3

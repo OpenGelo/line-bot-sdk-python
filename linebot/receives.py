@@ -28,15 +28,16 @@ class Receive():
 
 class Message():
     def __init__(self, datum):
+        content = datum['content']
         self.__data = {
-            'id': datum['content']['id'],
-            'from_mid': datum['content']['from'],
-            'to_mid': datum['content']['to'],
+            'id': content['id'],
+            'from_mid': content['from'],
+            'to_mid': content['to'],
             'from_channel_id': datum['fromChannel'],
             'to_channel_id': datum['toChannel'],
             'event_type': datum['eventType'],
-            'created_time': datum['content']['createdTime'],
-            'content': self.__generate_content(datum['content']),
+            'created_time': content['createdTime'],
+            'content': self.__generate_content(content),
         }
 
     def __getitem__(self, key):
@@ -50,31 +51,35 @@ class Message():
             )
         elif content_type == ContentType.IMAGE:
             return messages.ImageMessage(
-                image_url=attrs['originalContentUrl'],
-                preview_url=attrs['previewImageUrl'],
+                image_url=attrs.get('originalContentUrl'),
+                preview_url=attrs.get('previewImageUrl'),
             )
         elif content_type == ContentType.VIDEO:
             return messages.VideoMessage(
-                video_url=attrs['originalContentUrl'],
-                preview_url=attrs['previewImageUrl'],
+                video_url=attrs.get('originalContentUrl'),
+                preview_url=attrs.get('previewImageUrl'),
             )
         elif content_type == ContentType.AUDIO:
+            meta = attrs.get('contentMetadata')
+            duration = meta.get('duration') if meta else None
             return messages.AudioMessage(
-                audio_url=attrs['originalContentUrl'],
-                duration=attrs['contentMetadata']['duration'],
+                audio_url=attrs.get('originalContentUrl'),
+                duration=duration,
             )
-        elif content_type == ContentType.Location:
+        elif content_type == ContentType.LOCATION:
+            location = attrs['location']
             return messages.LocationMessage(
-                title=attrs['location']['title'],
-                address=attrs['location']['address'],
-                latitude=attrs['location']['latitude'],
-                longitude=attrs['location']['longitude'],
+                title=location['title'],
+                address=location['address'],
+                latitude=location['latitude'],
+                longitude=location['longitude'],
             )
         elif content_type == ContentType.STICKER:
+            meta = attrs['contentMetadata']
             return messages.StickerMessage(
-                stkpkgid=attrs['contentMetadata']['STKPKGID'],
-                stkid=attrs['contentMetadata']['STKID'],
-                stkver=attrs['contentMetadata']['STKVER'],
+                stkpkgid=meta['STKPKGID'],
+                stkid=meta['STKID'],
+                stkver=meta['STKVER'],
             )
         else:
             raise ValueError('Invalid content type.')
